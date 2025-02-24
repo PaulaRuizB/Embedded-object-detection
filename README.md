@@ -5,13 +5,15 @@ Real-time unsupervised video object detection on the edge
 ```
 git clone https://github.com/PaulaRuizB/Embedded-object-detection
 ```
-2. What you need to use the codes 
+2. What you need to use the codes:
+   
 Python 3.8.10, TensorRT 8.4.1, cuDNN 8.4.1 and requirements video_detection_requirements.txt into venv_requirements folder
 
-3. If you want to use the same images
+4. If you want to use the same images:
+   
 https://www.airport.gdansk.pl/lotnisko/kamery-internetowe-p30.html
 
-4. 
+6. 
 
 
 ### Our [paper](https://www.sciencedirect.com/science/article/pii/S0167739X25000329)
