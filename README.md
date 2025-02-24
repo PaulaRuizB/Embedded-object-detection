@@ -10,10 +10,10 @@ git clone https://github.com/PaulaRuizB/Embedded-object-detection
 If you find this code useful in your research, please consider citing:
 
     @article{ruiz2025real,
-  title={Real-time unsupervised video object detection on the edge},
-  author={Ruiz-Barroso, Paula and Castro, Francisco M and Guil, Nicol{\'a}s},
-  journal={Future Generation Computer Systems},
-  pages={107737},
-  year={2025},
-  publisher={Elsevier}
+      title={Real-time unsupervised video object detection on the edge},
+      author={Ruiz-Barroso, Paula and Castro, Francisco M and Guil, Nicol{\'a}s},
+      journal={Future Generation Computer Systems},
+      pages={107737},
+      year={2025},
+      publisher={Elsevier}
     }
