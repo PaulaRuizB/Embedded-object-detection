@@ -13,6 +13,11 @@ Python 3.8.10, TensorRT 8.4.1, cuDNN 8.4.1 and requirements video_detection_requ
 
 4. Region Encoding Network: ResNet50 with Supervised Contrastive Loss, pretrained weights available at: https://github.com/HobbitLong/SupContrast
 
+### Train pipeline:
+
+### Optimize models with TensorRT
+
+### Test pipeline:
 
 ### Our [paper](https://www.sciencedirect.com/science/article/pii/S0167739X25000329)
 If you find this code useful in your research, please consider citing:
