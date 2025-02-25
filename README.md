@@ -11,9 +11,13 @@ Python 3.8.10, TensorRT 8.4.1, cuDNN 8.4.1 and requirements video_detection_requ
 
 3. If you want to use the same images: https://www.airport.gdansk.pl/lotnisko/kamery-internetowe-p30.html
 
-4. Region Encoding Network: ResNet50 with Supervised Contrastive Loss, pretrained weights available at: https://github.com/HobbitLong/SupContrast
-
-### Train pipeline:
+4. Pretrained models
+   In pretrained_models folder:
+   * best.pt: Region Proposal Network (RPN)
+   * supcon.pth: Region Encoding Network (REN). pretrained weights also available at: https://github.com/HobbitLong/SupContrast
+   * model_cluster.pth: UMAP model (UMAP-M)
+   
+### Train pipeline with PyTorch:
 
 ### Optimize models with TensorRT
 
