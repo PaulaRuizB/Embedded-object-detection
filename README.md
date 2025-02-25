@@ -15,6 +15,7 @@ Python 3.8.10, TensorRT 8.4.1, cuDNN 8.4.1 and requirements video_detection_requ
    
    In pretrained_models folder:
    * best.pt: Region Proposal Network (RPN)
+   * last_302.pt: Region Proposal Network (RPN) quantized to INT8
    * supcon.pth: Region Encoding Network (REN), original pretrained weights available at: https://github.com/HobbitLong/SupContrast
    * model_cluster.pth: UMAP model (UMAP-M)
    
