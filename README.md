@@ -20,15 +20,24 @@ Python 3.8.10, TensorRT 8.4.1, cuDNN 8.4.1 and requirements video_detection_requ
    * model_cluster.pth: UMAP model (UMAP-M). Note that this model is adapted to our dataset only.
    
 ### Train pipeline with PyTorch:
+Mains folder:
 ```
 python3 Xavier_pipeline_train_global.py --path_images /path_dataset/JPEGImages/ --kind_of normal --path_trt None --path_trt_descriptor None --output_path /experiments_path/prueba_torch_paper/ --kind_detection xavier --kind_descriptor xavier --version_detection yolov4_resnet50 --version_descriptor resnet --clustering_algorithm hdbscan --compression_algorithm model_umap --torch_use --path_trt_cluster None
 ```
 ### Optimize models with TensorRT
-From PyTorch to ONNX:
+From PyTorch to ONNX (utils folder):
 
-* Region proposal Network
+* Region Proposal Network
 ```
-python3 rpn_torch_to_onnx.py --weights /path_model/ --save_path /save_path/
+python3 rpn_torch_to_onnx.py --weights /path_model/
+```
+* Region Encoding Network
+```
+python3 ren_torch_to_onnx.py --weights /path_model/ --save_path /save_path/
+```
+* UMAP model
+```
+python3 cluster_torch_to_onnx.py --weights /path_model/ --save_path /save_path/
 ```
 
 ### Test pipeline:
