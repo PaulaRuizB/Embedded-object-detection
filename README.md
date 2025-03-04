@@ -39,7 +39,31 @@ python3 ren_torch_to_onnx.py --weights /path_model/ --save_path /save_path/
 ```
 python3 cluster_torch_to_onnx.py --weights /path_model/ --save_path /save_path/
 ```
-
+From ONNX to TensorRT
+* FP32 GPU
+```
+/usr/src/tensorrt/bin/trtexec --onnx=/path_onnx_model/ --saveEngine=/path_save_trt/
+```
+* FP16 GPU
+```
+/usr/src/tensorrt/bin/trtexec --onnx=/path_onnx_model/ --saveEngine=/path_save_trt/ --fp16
+```
+* INT8 GPU
+```
+/usr/src/tensorrt/bin/trtexec --onnx=/path_onnx_model/ --saveEngine=/path_save_trt/ --int8
+```
+* FP32 GPU + DLA
+```
+/usr/src/tensorrt/bin/trtexec --onnx=/path_onnx_model/ --saveEngine=/path_save_trt/ --useDLACore=0 --allowGPUFallback
+```
+* FP16 GPU + DLA
+```
+/usr/src/tensorrt/bin/trtexec --onnx=/path_onnx_model/ --saveEngine=/path_save_trt/ --fp16 --useDLACore=0 --allowGPUFallback
+```
+* INT8 GPU + DLA
+```
+/usr/src/tensorrt/bin/trtexec --onnx=/path_onnx_model/ --saveEngine=/path_save_trt/ --int8 --useDLACore=0 --allowGPUFallback
+```
 ### Test pipeline:
 
 ### Our [paper](https://www.sciencedirect.com/science/article/pii/S0167739X25000329)
