@@ -17,10 +17,12 @@ Python 3.8.10, TensorRT 8.4.1, cuDNN 8.4.1 and requirements video_detection_requ
    * best.pt: Region Proposal Network (RPN)
    * last_302.pt: Region Proposal Network (RPN) quantized to INT8
    * supcon.pth: Region Encoding Network (REN), original pretrained weights available at: https://github.com/HobbitLong/SupContrast
-   * model_cluster.pth: UMAP model (UMAP-M)
+   * model_cluster.pth: UMAP model (UMAP-M). Note that this model is adapted to our dataset only.
    
 ### Train pipeline with PyTorch:
-
+```
+python3 Xavier_pipeline_train_global.py --path_images /path_dataset/JPEGImages/ --kind_of normal --path_trt None --path_trt_descriptor None --output_path /experiments_path/prueba_torch_paper/ --kind_detection xavier --kind_descriptor xavier --version_detection yolov4_resnet50 --version_descriptor resnet --clustering_algorithm hdbscan --compression_algorithm model_umap --torch_use --path_trt_cluster None
+```
 ### Optimize models with TensorRT
 
 ### Test pipeline:
