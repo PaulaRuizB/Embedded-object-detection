@@ -22,7 +22,7 @@ Python 3.8.10, TensorRT 8.4.1, cuDNN 8.4.1 and requirements video_detection_requ
 ### Train pipeline with PyTorch:
 Mains folder:
 ```
-python3 Xavier_pipeline_train_global.py --path_images /path_dataset/JPEGImages/ --kind_of normal --path_trt None --path_trt_descriptor None --output_path /experiments_path/prueba_torch_paper/ --kind_detection xavier --kind_descriptor xavier --version_detection yolov4_resnet50 --version_descriptor resnet --clustering_algorithm hdbscan --compression_algorithm model_umap --torch_use --path_trt_cluster None
+python3 Xavier_pipeline_train_global.py --path_images /path_dataset/JPEGImages/ --kind_of normal --path_trt None --path_trt_descriptor None --output_path /experiments_path/ --kind_detection xavier --kind_descriptor xavier --version_detection yolov4_resnet50 --version_descriptor resnet --clustering_algorithm hdbscan --compression_algorithm model_umap --torch_use --path_trt_cluster None
 ```
 ### Optimize models with TensorRT
 From PyTorch to ONNX (utils folder):
@@ -64,7 +64,10 @@ From ONNX to TensorRT
 ```
 /usr/src/tensorrt/bin/trtexec --onnx=/path_onnx_model/ --saveEngine=/path_save_trt/ --int8 --useDLACore=0 --allowGPUFallback
 ```
-### Test pipeline:
+### Test pipeline with optimized TensorRT models:
+```
+python3 TRT_Xavier_pipeline_test_global.py --path_trt /path_detector_model_trt/ --path_trt_descriptor /path_descriptor_model_trt/ --path_trt_cluster /path_umap_model/ --kind_of normal --path_images /path_dataset/JPEGImages/ --output_path /experiments_path/ --path_clusters /path_clusters/ --kind_detection trt --kind_descriptor trt --version_detection yolov4_resnet50 --version_descriptor resnet --clustering_algorithm hdbscan --compression_algorithm model_umap
+```
 
 ### Our [paper](https://www.sciencedirect.com/science/article/pii/S0167739X25000329)
 If you find this code useful in your research, please consider citing:
