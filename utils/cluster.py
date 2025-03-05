@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 from sklearn.decomposition import PCA
 import hdbscan
+import pickle
 import random
 from sklearn.cluster import OPTICS
 from sklearn.cluster import DBSCAN
@@ -13,8 +14,8 @@ import torch
 import torch.nn as nn
 import time
 from pathlib import Path
-TRT_LOGGER = trt.Logger()
 
+TRT_LOGGER = trt.Logger()
 random.seed(999)
 
 def create_model(layers):
@@ -77,6 +78,62 @@ class ClusterModel:
 		self.end = end
 		self.path_cluster = path_cluster
 		self.torch_use = torch_use
+
+	def load_model(self, path):
+		class model_torch(torch.nn.Module):
+
+			def __init__(self):
+				super(model_torch, self).__init__()
+
+				self.dropout_1 = nn.Dropout(0.2)
+				self.linear1 = torch.nn.Linear(128, 128)
+				self.activation_1 = torch.nn.ReLU()
+				self.dropout_2 = nn.Dropout(0.2)
+				self.linear2 = torch.nn.Linear(128, 128)
+				self.activation_2 = torch.nn.ReLU()
+				self.dropout_3 = nn.Dropout(0.2)
+				self.linear3 = torch.nn.Linear(128, 128)
+				self.activation_3 = torch.nn.ReLU()
+				self.dropout_4 = nn.Dropout(0.2)
+				self.linear4 = torch.nn.Linear(128, 128)
+				self.activation_4 = torch.nn.ReLU()
+				self.linear5 = torch.nn.Linear(128, 128)
+
+			def forward(self, x):
+				x = self.dropout_1(self.activation_1(self.linear1(x)))
+				x = self.dropout_2(self.activation_2(self.linear2(x)))
+				x = self.dropout_3(self.activation_3(self.linear3(x)))
+				x = self.dropout_4(self.activation_4(self.linear4(x)))
+				x = self.linear5(x)
+				return x
+
+		file_clusterer = open(path + 'clusterer.obj', 'rb')
+		self.cluster = pickle.load(file_clusterer)
+		if self.torch_use:
+
+			model_torch = model_torch()
+			base_dir = Path(__file__).resolve().parent.parent
+			model_path = str(base_dir / "pretrained_models/model_cluster.pth")
+
+			# Load model
+			model_torch.load_state_dict(torch.load(model_path))
+			model_torch.eval()
+
+			self.model_torch = model_torch
+			self.engine = None
+		else:
+			try:
+				file_reducer = open(path + 'reducer.obj', 'rb')
+				self.reducer = pickle.load(file_reducer)
+				self.engine = None
+			except:
+				if self.end == False:
+					self.engine = get_engine(self.path_cluster, self.dla)
+					self.context = self.engine.create_execution_context()
+				if self.end == True:
+					self.engine = 0
+					self.context = 0
+
 
 	def build(self, data, bbs):
 		class model_torch(torch.nn.Module):
@@ -190,7 +247,6 @@ class ClusterModel:
 			embedding_ = feats[0].reshape((activations.shape[0], -1))
 
 		else:
-			###AQUIIII
 			embedding_ = self.model_torch(torch.Tensor(activations))
 			embedding_ = embedding_.detach().numpy()
 
@@ -251,10 +307,10 @@ class ClusterModel:
 		print("Detections total: {}".format(len(imge_paths)))
 		for i in range(ulabs.shape[0]):
 			positions = np.where(ulabs[i] == labels)[0]
-			positions = positions[np.argsort(scores[positions])][::-1] #todo comentado por OPTICS
+			positions = positions[np.argsort(scores[positions])][::-1]
 			print("Detections class {} : {}".format(i, positions.shape[0]))
 			if positions.shape[0]<100:
-				data_ = self.load_images(positions, imge_paths, boxes, positions.shape[0]) #last number limit what is saving
+				data_ = self.load_images(positions, imge_paths, boxes, positions.shape[0])
 			else:
 				data_ = self.load_images(positions, imge_paths, boxes, 100)
 
