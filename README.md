@@ -72,6 +72,13 @@ More options:
 * If you want to use DLAs (Deep Learning Accelerators) add --dla after transforming the models to be deployed on DLAs
 * To measure inference time and energy consumption add --measure_gpu to measure processes deployed on GPU, --measure_cpu for CPU and --measure_dla for DLAs.
 
+### mAP and CorLoc test:
+
+Complete paramters list (lines 15-22) and labels_map in line 369:
+```
+python3 compute_metrics_corloc_map.py
+```
+
 ### Our [paper](https://www.sciencedirect.com/science/article/pii/S0167739X25000329)
 If you find this code useful in your research, please consider citing:
 
