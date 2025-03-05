@@ -68,6 +68,9 @@ From ONNX to TensorRT
 ```
 python3 TRT_Xavier_pipeline_test_global.py --path_trt /path_detector_model_trt/ --path_trt_descriptor /path_descriptor_model_trt/ --path_trt_cluster /path_umap_model/ --kind_of normal --path_images /path_dataset/JPEGImages/ --output_path /experiments_path/ --path_clusters /path_clusters/ --kind_detection trt --kind_descriptor trt --version_detection yolov4_resnet50 --version_descriptor resnet --clustering_algorithm hdbscan --compression_algorithm model_umap
 ```
+More options:
+* If you want to use DLAs (Deep Learning Accelerators) add --dla after transforming the models to be deployed on DLAs
+* To measure inference time and energy consumption add --measure_gpu to measure processes deployed on GPU, --measure_cpu for CPU and --measure_dla for DLAs.
 
 ### Our [paper](https://www.sciencedirect.com/science/article/pii/S0167739X25000329)
 If you find this code useful in your research, please consider citing:
