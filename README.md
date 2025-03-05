@@ -74,7 +74,7 @@ More options:
 
 ### mAP and CorLoc test:
 
-Complete paramters list (lines 15-22) and labels_map in line 369:
+Complete parameters list (lines 15-22) and labels_map in line 369:
 ```
 python3 compute_metrics_corloc_map.py
 ```
